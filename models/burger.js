@@ -1,5 +1,4 @@
-var connection = require ('../config/connection.js');
-var connection = require ('../config/orm.js');
+var orm = require('../config/orm.js');
 
 //Create Burger Object
 var burger = {
@@ -11,14 +10,14 @@ var burger = {
     },
 
     // The variable cols and cals are arrays
-    insertOne: function(col, vals, cb) {
+    insertOne: function(cols, vals, cb) {
         orm.insertOne("burgers", cols, vals, function(res) {
             cb(res);
         });
     },
 
     updateOne: function(objColVals, condition, cb) {
-        orm.updateOne("burgers", condition, function(res) {
+        orm.updateOne("burgers", objColVals, condition, function(res) {
             cb(res);
         });
     }
