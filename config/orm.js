@@ -36,18 +36,28 @@ function printQuestionMarks(num) {
     return arr.toString();
   }
   
+
+
   // Object for all our SQL statement functions.
   var orm = {
-    all: function(tableInput, cb) {
-      var queryString = "SELECT * FROM " + tableInput + ";";
-      connection.query(queryString, function(err, result) {
-        if (err) {
-          throw err;
-        }
-        cb(result);
-      });
+     //function that reurns all tables
+    selectAll: function(tableInput, cb) {
+        // Construct the query string that returns all rows from the target table
+        var queryString = "SELECT * FROM " + tableInput + ";";
+
+            // perform database query
+            connection.query(queryString, function(err, result) {
+                if (err) {
+                    throw err;
+                }
+                // return results in callback
+                cb(result);
+            });
     },
-    create: function(table, cols, vals, cb) {
+
+
+    insertOne: function(table, cols, vals, cb) {
+      // construct the query string that inserts a single row into the target table
       var queryString = "INSERT INTO " + table;
   
       queryString += " (";
@@ -58,38 +68,31 @@ function printQuestionMarks(num) {
       queryString += ") ";
   
       console.log(queryString);
-  
+      
+      // Perform the database query
       connection.query(queryString, vals, function(err, result) {
         if (err) {
           throw err;
         }
-  
+        
+        //Return results in callback
         cb(result);
       });
     },
+
     // An example of objColVals would be {name: panther, sleepy: true}
-    update: function(table, objColVals, condition, cb) {
+    // Function that updates a single table entry
+    updateOne: function(table, objColVals, condition, cb) {
+      // Contruct the query string that updates a single entry in the target table
       var queryString = "UPDATE " + table;
   
       queryString += " SET ";
       queryString += objToSql(objColVals);
       queryString += " WHERE ";
       queryString += condition;
-  
+      
+      // Perform the database query
       console.log(queryString);
-      connection.query(queryString, function(err, result) {
-        if (err) {
-          throw err;
-        }
-  
-        cb(result);
-      });
-    },
-    delete: function(table, condition, cb) {
-      var queryString = "DELETE FROM " + table;
-      queryString += " WHERE ";
-      queryString += condition;
-  
       connection.query(queryString, function(err, result) {
         if (err) {
           throw err;
