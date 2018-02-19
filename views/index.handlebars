@@ -6,7 +6,7 @@
     {{#each burgers}}
         {{#unless this.devoured}}
         
-            {{> burgers/burger-block devoured=true}}
+            {{this.burger_name}}
         
         {{/unless}}
     {{/each}}
@@ -18,7 +18,7 @@
     {{#each burgers}}
         {{#if this.devoured}}
             
-            {{> burgers/burger-block devoured=false}}
+            {{this.burger_name}}
         
         {{/if}}
     {{/each}}
@@ -26,3 +26,7 @@
 
 <h2>Add A Tasty Burger</h2>
 
+<form action="/burgers" method="POST">
+    <input type="text" id="name" name="burger_name" placeholder="Da Burger">
+    <button type="submit" class="addBurgerButton">Add Da Burger</button>
+</form>
