@@ -1,28 +1,40 @@
 <h1>Eat-Da-Burger!</h1>
 
-<h2>Tasty Burgers Waiting to be Devoured!</h2>
+<main>
 
-<ul>
-    {{#each burgers}}
-        {{#unless this.devoured}}
-        
-            {{this.burger_name}}
-        
-        {{/unless}}
-    {{/each}}
-</ul>
 
-<h2>OM NOM NOM NOM! These Burgers have been Devoured!</h2>
+    <h2>Tasty Burgers Waiting to be Devoured!</h2>
 
-<ul>
-    {{#each burgers}}
-        {{#if this.devoured}}
-            
-            {{this.burger_name}}
-        
-        {{/if}}
-    {{/each}}
-</ul>
+        <ul>
+            {{#each burgers}}
+                {{#unless this.devoured}}
+                
+                    {{this.burger_name}}
+                
+                {{/unless}}
+            {{/each}}
+        </ul>
+
+    <h2>OM NOM NOM NOM! These Burgers have been Devoured!</h2>
+
+        <ul>
+            {{#each burgers}}
+                {{#if this.devoured}}
+                    
+                    {{this.burger_name}}
+                
+                {{/if}}
+            {{/each}}
+        </ul>
+
+
+</main>
+
+
+
+
+
+
 
 <h2>Add A Tasty Burger</h2>
 
