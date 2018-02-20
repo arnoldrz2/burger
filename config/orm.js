@@ -90,9 +90,10 @@ function printQuestionMarks(num) {
       queryString += objToSql(objColVals);
       queryString += " WHERE ";
       queryString += condition;
+            
+      console.log(queryString);
       
       // Perform the database query
-      console.log(queryString);
       connection.query(queryString, function(err, result) {
         if (err) {
           throw err;

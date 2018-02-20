@@ -1,44 +1,60 @@
-<h1>Eat-Da-Burger!</h1>
+<div class="container">
+    <h1>Eat-Da-Burger!</h1> <br>
 
-<main>
+    <h4>
+        Welcome to Eat-Da-Burger! To devour the tasty burger of your choice, click the "NOM NOM NOM!" button below your desired burger.
+    </h4>
 
 
-    <h2>Tasty Burgers Waiting to be Devoured!</h2>
 
-        <ul>
-            {{#each burgers}}
-                {{#unless this.devoured}}
+    <div class="row">
+        {{!-- Burgers Menu --}}
+        <div class="col-sm-6">
+            <h3>Tasty Burger Menu</h3><br>
                 
-                    {{this.burger_name}}
+                    {{#each burgers}}
+                        {{#unless this.devoured}}
+                            <ul>
+                                <h4 class="daBurger">{{this.burger_name}}
+                                    <form action='/burgers/{{this.id}}?_method=PUT' method="POST">
+                                        <input type="hidden" name="devoured" value="true"> 
+                                        <button type="submit" class="btn btn-default">NOM NOM NOM!</button>                      
+                                    </form> 
+                                </h4>
+                            </ul>
+
+                        {{/unless}}
+                    {{/each}}
                 
-                {{/unless}}
-            {{/each}}
-        </ul>
-
-    <h2>OM NOM NOM NOM! These Burgers have been Devoured!</h2>
-
-        <ul>
-            {{#each burgers}}
-                {{#if this.devoured}}
-                    
-                    {{this.burger_name}}
+        </div>  
+        {{!--Devoured Burgers--}}
+        <div class="col-sm-6">
+            <h3>Devoured Burgers</h3><br>
                 
-                {{/if}}
-            {{/each}}
-        </ul>
+                    {{#each burgers}}
+                        {{#if this.devoured}}
+                            <ul>
+                                <h4 class="text-muted daBurger">{{this.burger_name}}</h4>
+                            </ul>
+                        {{/if}}
+                    {{/each}}
+                
+        </div>
+    </div>
+    {{!-- Add Burger --}}
+    <div class="row">
+        <div class="col-sm-12">
+                <h3>Add A Tasty Burger</h3><br>
+
+                <form action="/burgers" method="POST">
+                    <input type="text" id="name" name="burger_name" placeholder="Da Burger">
+                    <button type="submit" class="addBurgerButton">Add Da Burger</button>
+                </form>
+
+         </div>
+    </div>
+</div>
 
 
-</main>
 
 
-
-
-
-
-
-<h2>Add A Tasty Burger</h2>
-
-<form action="/burgers" method="POST">
-    <input type="text" id="name" name="burger_name" placeholder="Da Burger">
-    <button type="submit" class="addBurgerButton">Add Da Burger</button>
-</form>
