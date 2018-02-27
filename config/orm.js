@@ -79,31 +79,40 @@ function printQuestionMarks(num) {
         cb(result);
       });
     },
-
-    // An example of objColVals would be {name: panther, sleepy: true}
     // Function that updates a single table entry
+    // An example of objColVals would be {name: panther, sleepy: true}
     updateOne: function(table, objColVals, condition, cb) {
-      // Contruct the query string that updates a single entry in the target table
       var queryString = "UPDATE " + table;
-  
+
       queryString += " SET ";
       queryString += objToSql(objColVals);
       queryString += " WHERE ";
       queryString += condition;
-            
+
       console.log(queryString);
-      
-      // Perform the database query
       connection.query(queryString, function(err, result) {
         if (err) {
           throw err;
         }
-  
+
+        cb(result);
+      });
+    },
+    delete: function(table, condition, cb) {
+      var queryString = "DELETE FROM " + table;
+      queryString += " WHERE ";
+      queryString += condition;
+
+      connection.query(queryString, function(err, result) {
+        if (err) {
+          throw err;
+        }
+
         cb(result);
       });
     }
-  };
+};
   
-  // Export the orm object for the model (cat.js).
+  // Export the orm object for the model.
   module.exports = orm;
   
